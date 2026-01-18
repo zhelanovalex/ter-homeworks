@@ -14,3 +14,11 @@ provider "yandex" {
   zone                     = var.default_zone
   service_account_key_file = file("~/.authorized-key.json")
 }
+provider "yandex" {
+  # token     = var.token
+  alias                    = "zone_b" 
+  cloud_id                 = var.cloud_id
+  folder_id                = var.folder_id
+  zone                     = var.vm_zones_b
+  service_account_key_file = file("~/.authorized-key.json")
+}

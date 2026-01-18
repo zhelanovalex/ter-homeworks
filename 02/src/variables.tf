@@ -18,6 +18,7 @@ variable "default_zone" {
   default     = "ru-central1-a"
   description = "https://cloud.yandex.ru/docs/overview/concepts/geo-scope"
 }
+
 variable "default_cidr" {
   type        = list(string)
   default     = ["10.0.1.0/24"]
@@ -28,6 +29,18 @@ variable "vpc_name" {
   type        = string
   default     = "develop"
   description = "VPC network & subnet name"
+}
+
+variable "vm_web_instance_name" {
+  type        = string
+  default     = "netology-develop-platform-web"
+  description = "VM instance name"
+}
+
+variable "vm_web_image_family" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "VM image family"
 }
 
 ###ssh vars
