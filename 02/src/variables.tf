@@ -3,11 +3,13 @@
 
 variable "cloud_id" {
   type        = string
+  default     = "b1goe5r76g9fptfhp9po"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/cloud/get-id"
 }
 
 variable "folder_id" {
   type        = string
+  default     = "b1gq8s97k9ikht5vcsi4"
   description = "https://cloud.yandex.ru/docs/resource-manager/operations/folder/get-id"
 }
 
@@ -28,11 +30,10 @@ variable "vpc_name" {
   description = "VPC network & subnet name"
 }
 
-
 ###ssh vars
 
 variable "vms_ssh_root_key" {
   type        = string
-  default     = "<your_ssh_ed25519_key>"
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEoPKcv9/oVqeP2irzonN4rB1GCChuDsTaledNpkcEpe root@Uglycomp"
   description = "ssh-keygen -t ed25519"
 }
