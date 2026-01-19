@@ -22,7 +22,7 @@ data "yandex_compute_image" "ubuntu_db" {
   family = var.vm_db_image_family
 }
 resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_instance_name
+  name        = local.vm_web_instance
   platform_id = "standard-v2"
   resources {
     cores         = 2
@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "platform" {
   }
 }
 resource "yandex_compute_instance" "platform_db" {
-  name        = var.vm_db_instance_name
+  name        = local.vm_db_instance
   provider      = yandex.zone_b
   zone          = var.vm_zones_b
   platform_id = "standard-v2"
