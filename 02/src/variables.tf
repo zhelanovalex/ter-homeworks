@@ -42,11 +42,43 @@ variable "vm_web_image_family" {
   default     = "ubuntu-2004-lts"
   description = "VM image family"
 }
-
+/*
 ###ssh vars
 
 variable "vms_ssh_root_key" {
   type        = string
   default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEoPKcv9/oVqeP2irzonN4rB1GCChuDsTaledNpkcEpe root@Uglycomp"
   description = "ssh-keygen -t ed25519"
+}
+*/
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+  }))
+  default = {
+    web = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+    }
+    db = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
+    }
+  }
+}
+variable "vms_metadata" {
+  type = map(object({
+    sport           = number
+    skeys           = string
+  }))
+  default = {
+    metassh= {
+      sport         = 1
+      skeys         = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEoPKcv9/oVqeP2irzonN4rB1GCChuDsTaledNpkcEpe root@Uglycomp"
+    }
+  }
 }
