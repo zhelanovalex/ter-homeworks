@@ -55,8 +55,8 @@ variable "security_group_egress" {
 }
 
 
-resource "yandex_vpc_security_group" "example" {
-  name       = "example_dynamic"
+resource "yandex_vpc_security_group" "neto_example" {
+  name       = var.vpc_sg_name
   network_id = yandex_vpc_network.develop.id
   folder_id  = var.folder_id
 

@@ -30,3 +30,74 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "vpc_sg_name" {
+  type        = string
+  default     = "neto_sg_dynamic"
+  description = "VPC SG name"
+}
+
+variable "vm_web_image_family" {
+  type        = string
+  default     = "ubuntu-2004-lts"
+  description = "VM image family"
+}
+
+variable "vms_resources" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+  }))
+  default = {
+    web = {
+      cores         = 2
+      memory        = 1
+      core_fraction = 5
+    }
+    db = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
+    }
+  }
+}
+variable "vms_metadata" {
+  type = map(object({
+    sport           = number
+  }))
+  default = {
+    metassh= {
+      sport         = 1
+    }
+  }
+}
+
+variable "vms_db" {
+  type = map(object({
+    cores         = number
+    memory        = number
+    core_fraction = number
+    bdisksize      = number
+    bdisktype     = string
+    platid        = string
+  }))
+  default = {
+    db-main-neto = {
+      cores         = 4
+      memory        = 4
+      core_fraction = 50
+      bdisksize     = 15
+      bdisktype     = "network-hdd"
+      platid        = "standard-v2"
+    },
+    db-replica-neto = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 20
+      bdisksize     = 12
+      bdisktype     = "network-hdd"
+      platid        = "standard-v2"
+    }
+  }
+}
