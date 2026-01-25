@@ -1,6 +1,6 @@
 resource "yandex_compute_instance" "platform_db" {
-  for_each = var.vms_db
-  name        = each.key
+  for_each = { for i, wms in var.vms_db : i => wms }
+  name        = each.value.db_name
   platform_id = each.value.platid
   resources {
     cores         = each.value.cores

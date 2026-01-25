@@ -37,6 +37,12 @@ variable "vpc_sg_name" {
   description = "VPC SG name"
 }
 
+variable "vms_storage_name" {
+  type        = string
+  default     = "stotage-neto"
+  description = "VMS Storage name"
+}
+
 variable "vm_web_image_family" {
   type        = string
   default     = "ubuntu-2004-lts"
@@ -48,17 +54,26 @@ variable "vms_resources" {
     cores         = number
     memory        = number
     core_fraction = number
+    bdisksize      = number
+    bdisktype     = string
+    platid        = string
   }))
   default = {
     web = {
       cores         = 2
       memory        = 1
       core_fraction = 5
+      bdisksize     = 1
+      bdisktype     = "network-hdd"
+      platid        = "standard-v2"
     }
     db = {
       cores         = 2
       memory        = 2
       core_fraction = 20
+      bdisksize     = 1
+      bdisktype     = "network-hdd"
+      platid        = "standard-v2"
     }
   }
 }
@@ -74,7 +89,8 @@ variable "vms_metadata" {
 }
 
 variable "vms_db" {
-  type = map(object({
+  type = list(object({
+    db_name       = string
     cores         = number
     memory        = number
     core_fraction = number
@@ -82,8 +98,9 @@ variable "vms_db" {
     bdisktype     = string
     platid        = string
   }))
-  default = {
-    db-main-neto = {
+  default = [
+    {
+      db_name       = "main-neto"
       cores         = 4
       memory        = 4
       core_fraction = 50
@@ -91,7 +108,8 @@ variable "vms_db" {
       bdisktype     = "network-hdd"
       platid        = "standard-v2"
     },
-    db-replica-neto = {
+    {
+      db_name       = "replica-neto"
       cores         = 2
       memory        = 2
       core_fraction = 20
@@ -99,5 +117,5 @@ variable "vms_db" {
       bdisktype     = "network-hdd"
       platid        = "standard-v2"
     }
-  }
+  ]
 }
